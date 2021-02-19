@@ -81,6 +81,7 @@ void init_Timer3(void)
 int main(void)
 {
   uint32_t compare=0;
+  int8_t dir = 1;
   
   // Initialize User Button on STM32F0-Discovery
   STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_GPIO);
@@ -88,17 +89,25 @@ int main(void)
   init_GPIO();
 	init_Timer3();
 	
-  while(1)
-  {
-    delay( TENMILLISECONDS );
-    
-    // Update compare value
-    if (++compare > 99)
-    {
-  		compare=0;
+	while(1)
+	{
+		delay( TENMILLISECONDS );
+		
+		// Update compare value
+		if (compare == 100)
+		{
+			dir = -1;
 		}
-    TIM_SetCompare4(TIM3, compare);
-  }
+		
+		if (compare == 0)
+		{
+			dir = 1;
+		}
+		
+		compare += dir;
+		
+		TIM_SetCompare4(TIM3, compare);
+	}
 }
 
 #pragma push
