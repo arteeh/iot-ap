@@ -1,0 +1,11 @@
+--cpu Cortex-M0
+".\obj\main.o"
+".\obj\usart.o"
+".\obj\stm32f0xx_it.o"
+".\obj\include.o"
+".\obj\startup_stm32f0xx.o"
+".\obj\system_stm32f0xx.o"
+--library_type=microlib --strict --scatter ".\obj\usart.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\obj\usart.map" -o .\obj\usart.axf

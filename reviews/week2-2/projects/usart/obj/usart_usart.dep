@@ -1,0 +1,57 @@
+Dependencies for Project 'usart', Target 'usart': (DO NOT MODIFY !)
+F (.\src\main.c)(0x603036A1)(-c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I .\inc -I ..\..\libraries\CMSIS\Include -I ..\..\libraries\CMSIS\ST\STM32F0xx\Include-I.\RTE\_usart-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-IC:\Keil\ARM\CMSIS\Include-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F051x8-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\stm32f0xx.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cm0.h)(0x4F6C6028)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x599F2F9E)
+I (..\..\libraries\CMSIS\Include\core_cmInstr.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cmFunc.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x4F6C6028)
+I (.\inc\usart.h)(0x5B3B652E)
+I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x599F2F9C)
+I (.\inc\include.h)(0x6040B271)
+I (C:\Keil\ARM\ARMCC\include\stdbool.h)(0x599F2F9E)
+F (.\src\mainsystick.c)(0x5B7E7146)()
+F (.\src\mainfordebug.c)(0x5FDB4C28)()
+F (.\src\usart.c)(0x60303578)(-c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I .\inc -I ..\..\libraries\CMSIS\Include -I ..\..\libraries\CMSIS\ST\STM32F0xx\Include-I.\RTE\_usart-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-IC:\Keil\ARM\CMSIS\Include-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F051x8-o .\obj\usart.o --omf_browse .\obj\usart.crf --depend .\obj\usart.d)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\stm32f0xx.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cm0.h)(0x4F6C6028)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x599F2F9E)
+I (..\..\libraries\CMSIS\Include\core_cmInstr.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cmFunc.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x4F6C6028)
+I (.\inc\usart.h)(0x5B3B652E)
+I (.\inc\include.h)(0x6040B271)
+I (C:\Keil\ARM\ARMCC\include\stdbool.h)(0x599F2F9E)
+I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x599F2F9C)
+F (.\src\stm32f0xx_it.c)(0x60303575)(-c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I .\inc -I ..\..\libraries\CMSIS\Include -I ..\..\libraries\CMSIS\ST\STM32F0xx\Include-I.\RTE\_usart-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-IC:\Keil\ARM\CMSIS\Include-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F051x8-o .\obj\stm32f0xx_it.o --omf_browse .\obj\stm32f0xx_it.crf --depend .\obj\stm32f0xx_it.d)
+I (.\inc\stm32f0xx_it.h)(0x51762F84)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\stm32f0xx.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cm0.h)(0x4F6C6028)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x599F2F9E)
+I (..\..\libraries\CMSIS\Include\core_cmInstr.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cmFunc.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x4F6C6028)
+I (.\inc\include.h)(0x6040B271)
+I (C:\Keil\ARM\ARMCC\include\stdbool.h)(0x599F2F9E)
+I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x599F2F9C)
+I (.\inc\usart.h)(0x5B3B652E)
+F (.\src\include.c)(0x603036D8)(-c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I .\inc -I ..\..\libraries\CMSIS\Include -I ..\..\libraries\CMSIS\ST\STM32F0xx\Include-I.\RTE\_usart-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-IC:\Keil\ARM\CMSIS\Include-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F051x8-o .\obj\include.o --omf_browse .\obj\include.crf --depend .\obj\include.d)
+I (.\inc\include.h)(0x6040B271)
+I (C:\Keil\ARM\ARMCC\include\stdbool.h)(0x599F2F9E)
+I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x599F2F9C)
+I (.\inc\usart.h)(0x5B3B652E)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x599F2F9E)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\stm32f0xx.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cm0.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cmInstr.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cmFunc.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x4F6C6028)
+F (.\inc\include.h)(0x6040B271)()
+F (.\startup\startup_stm32f0xx.s)(0x4F58982C)(--cpu Cortex-M0 --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_usart-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-IC:\Keil\ARM\CMSIS\Include-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Device\Include--pd "__UVISION_VERSION SETA 525" --pd "STM32F051x8 SETA 1"--list .\obj\startup_stm32f0xx.lst --xref -o .\obj\startup_stm32f0xx.o --depend .\obj\startup_stm32f0xx.d)
+F (.\startup\system_stm32f0xx.c)(0x4F6C6028)(-c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I .\inc -I ..\..\libraries\CMSIS\Include -I ..\..\libraries\CMSIS\ST\STM32F0xx\Include-I.\RTE\_usart-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-IC:\Keil\ARM\CMSIS\Include-IC:\Keil\ARM\PACK\Keil\STM32F0xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F051x8-o .\obj\system_stm32f0xx.o --omf_browse .\obj\system_stm32f0xx.crf --depend .\obj\system_stm32f0xx.d)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\stm32f0xx.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cm0.h)(0x4F6C6028)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x599F2F9E)
+I (..\..\libraries\CMSIS\Include\core_cmInstr.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\Include\core_cmFunc.h)(0x4F6C6028)
+I (..\..\libraries\CMSIS\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x4F6C6028)
