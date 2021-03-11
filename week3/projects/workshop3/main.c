@@ -9,18 +9,18 @@ int main(void)
 	while(1)
 	{
 		// Hello world, one word at a time
-		setLetter('H'); delay(SECOND/2);
-		setLetter('e'); delay(SECOND/2);
-		setLetter('l'); delay(SECOND/2);
-		setLetter('l'); delay(SECOND/2);
-		setLetter('o'); delay(SECOND/2);
-		clear();		delay(SECOND/2);
-		setLetter('W'); delay(SECOND/2);
-		setLetter('o'); delay(SECOND/2);
-		setLetter('r'); delay(SECOND/2);
-		setLetter('l'); delay(SECOND/2);
-		setLetter('d'); delay(SECOND/2);
-		setLetter('!'); delay(SECOND/2);
+		setLetter('H');	delay(SECOND/2);
+		setLetter('e');	delay(SECOND/2);
+		setLetter('l');	delay(SECOND/2);
+		setLetter('l');	delay(SECOND/2);
+		setLetter('o');	delay(SECOND/2);
+		clear();	delay(SECOND/2);
+		setLetter('W');	delay(SECOND/2);
+		setLetter('o');	delay(SECOND/2);
+		setLetter('r');	delay(SECOND/2);
+		setLetter('l');	delay(SECOND/2);
+		setLetter('d');	delay(SECOND/2);
+		setLetter('!');	delay(SECOND/2);
 
 		clear();
 		delay(SECOND);
@@ -40,14 +40,14 @@ int main(void)
 		shiftRight();	delay(SECOND/10);
 		shiftLeft();	delay(SECOND/10);
 		shiftLeft();	delay(SECOND/10);
-		shiftUp();		delay(SECOND/10);
-		shiftUp();		delay(SECOND/10);
+		shiftUp();	delay(SECOND/10);
+		shiftUp();	delay(SECOND/10);
 		shiftDown();	delay(SECOND/10);
 		shiftDown();	delay(SECOND/10);
 		shiftDown();	delay(SECOND/10);
 		shiftDown();	delay(SECOND/10);
-		shiftUp();		delay(SECOND/10);
-		shiftUp();		delay(SECOND/10);
+		shiftUp();	delay(SECOND/10);
+		shiftUp();	delay(SECOND/10);
 		
 		clear();
 		delay(SECOND*2);
@@ -117,18 +117,16 @@ void initSpi(void)
 	
 	// Not sure what this means, but it works
 	SPI_SSOutputCmd(SPI1, ENABLE);
-    SPI_NSSPulseModeCmd(SPI1, ENABLE);
-    SPI_Cmd(SPI1, ENABLE);
+	SPI_NSSPulseModeCmd(SPI1, ENABLE);
+	SPI_Cmd(SPI1, ENABLE);
 }
 
 #pragma push
 #pragma O3
 void delay(const int d)
 {
-  volatile int i;
-
-  for(i=d; i>0; i--){ ; }
-
-  return;
+	volatile int i;
+	for(i=d; i>0; i--){ ; }
+	return;
 }
 #pragma pop

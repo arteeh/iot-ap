@@ -103,11 +103,11 @@ const uint8_t characters[][8] = {
 // Initialize the max7219 device
 void initMatrix(void)
 {
-	writeRegister(matrixRegDecodeMode, 0x00);			// no decoding
+	writeRegister(matrixRegDecodeMode, 0x00);		// no decoding
 	writeRegister(matrixRegIntensity, matrixIntensity);	// brightness intensity
-	writeRegister(matrixRegScanLimit, 0x07);			// scan limit = 8 LEDs
-	writeRegister(matrixRegShutdown, 0x01);				// power down=0, normal=1
-	writeRegister(matrixRegDisplayTest, 0x00);			// no test display
+	writeRegister(matrixRegScanLimit, 0x07);		// scan limit = 8 LEDs
+	writeRegister(matrixRegShutdown, 0x01);			// power down=0, normal=1
+	writeRegister(matrixRegDisplayTest, 0x00);		// no test display
 }
 
 // Clear the buffer and the matrix
@@ -230,7 +230,8 @@ void writeRegister(uint8_t address, uint8_t data)
 	// The address and data bytes need to be combined into a 16 bit variable to send.
 	// Address most significant, data least significant
 	uint16_t combined = ((uint16_t)address << 8) | data;
-    SPI_I2S_SendData16(SPI1,combined);
+	SPI_I2S_SendData16(SPI1,combined);
+	
 	// Sending messages too fast breaks everything, so wait a thousandth of a second.
 	// This is the smallest delay that works for me.
 	delay(SECOND/10000);
