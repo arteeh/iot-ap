@@ -1,7 +1,7 @@
 /******************************************************************************
  * File           : USART driver implementation file
  *****************************************************************************/
-#include "stm32f0xx.h"
+//#include "stm32f0xx.h"
 #include "usart.h"
 
 // ----------------------------------------------------------------------------
@@ -10,7 +10,7 @@
 volatile char rx_buffer;
 
 //comment the following line to test on the laptop instead of on the STM32
-#define ONTARGET 1
+//#define ONTARGET 1
 
 #ifndef ONTARGET
 
