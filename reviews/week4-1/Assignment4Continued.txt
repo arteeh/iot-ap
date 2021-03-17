@@ -1,0 +1,40 @@
+--------------------------------------------Speed comparison optimization level--------------------------------------------------
+
+Voor deze opdracht moesten we een speed comparison doen tussen de twee optimization levels van de debugger.
+Dit zijn mijn bevindingen:
+
+Level 0 : Een verschil van 2757 states;
+Level 3 : Een verschil van 2735 states;
+
+Zoals te zien is het verschil dus minimaal op de vele states die er al zijn. Toch zag ik wel dat bij een level 0
+optimalisatie een flink aantal meer states nodig waren om de calc_average functie te bereiken, daar zat wel een verschil
+van bijna 10000 states tussen. Level 0 optimalisatie is namelijk de betere optimalisatie, deze wordt daarom ook 
+aangeraden door uvision zelf. Dit level heeft namelijk bijna geen optimalisatie Terwijl level 3 wel een 
+flinke optimalisatie heeft, deze optimalisaties zorgen voor het herschrijven van de source code. Dit kan er dus toe lijden
+dat er iets meer states nodig zijn. 
+
+---------------------------------------------Floating point vs Fixed point (calc average)--------------------------------------------------
+Hierin moesten we het verschil in snelheid meten van de twee verschillende calc_average functies. Waarin de ene werd uitgevoerd met een float en de andere met een fixed point. 
+
+Fixed point states: 2735;
+Floating point states: 443;
+
+Hierin is wel echt een duidelijk verschil te zien tussen de twee manieren. Het verbaast me alleen wel dat de floating point manier overduidelijk minder states nodig heeft dan de fixed point manier. Ik heb beide manieren met een level 3 optimalisatie uitgevoerd dus daar kan het verschil niet liggen. Ook heb ik gekeken naar de sec value van het register window hierin was ook een best duidelijk verschil te zien.
+
+Fixed point sec: 0.00034188 seconden
+Floating point sec: 0.00005537 seconden
+
+Hierin zien we dat de floating point bijna 6x zo snel is dan de fixed point. Het kan misschien aan de manier van programmeren liggen en natuurlijk is daar nog een inhaalslag te halen maar het verschil is gigantisch. Terwijl op internet overal staat dat fixed point toch echt sneller is. Ik kan daarom geen echt goede redenering verzinnen voor dit probleem. 
+
+-------------------------------------------Floating point vs Fixed Point (multiply)--------------------------------------------------------
+
+In deze opdracht was het de bedoeling om het verschil te laten zien door een floating point multiplication en een fixed point multiplication. Het verscil in seconden is hieronder te zien.
+
+Fixed point sec: 0.0037862
+Floating point sec: 0.0056763
+
+Hierin zien we duidelijk dat de fixed point hier overduidelijk de winnaar is. Het kan dus zo zijn dat wanneer er iets moeilijkere taken zoals vermenigvuldigen of delen uitgevoerd moeten worden dat fixed point dan sneller is. Maar met taken zoals optellen en aftrekken het eigenlijk beter kan zijn om dit met floating point te doen. Hier moeten we natuurlijk wel rekening houden met de nauwkeurigheid van fixed point. Dus als je snel wil kunnen vermenigvuldigen en delen en je kan er mee leven dat er een stukje nauwkeurigheid verloren gaat dan is fixed point een goede optie om voor te gaan. 
+
+
+
+
