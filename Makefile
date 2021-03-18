@@ -1,14 +1,22 @@
-PROJ=reviews/week4-1
-PROJNAME=assignment4
+CC=gcc
+PROJ=reviews/week4-4
+PROJNAME=workshop4
 
 SRC=$(PROJ)/projects/$(PROJNAME)/src
 STARTUP=$(PROJ)/projects/$(PROJNAME)/startup
 
-INC=$(PROJ)/projects/$(PROJNAME)/inc
+INC_PROJ=$(PROJ)/projects/$(PROJNAME)/inc
 INC_CMSIS=$(PROJ)/libraries/CMSIS/Include
 INC_CMSIS_STM=$(PROJ)/libraries/CMSIS/ST/STM32F0xx/Include
+INC_ALL=-I$(STARTUP) -I$(INC_PROJ) -I$(INC_CMSIS) -I$(INC_CMSIS_STM)
 
 CFILES=$(SRC)/main.c $(SRC)/usart.c
 
 compile:
-	arm-none-eabi-gcc $(CFILES) -I$(STARTUP) -I$(INC) -I$(INC_CMSIS) -I$(INC_CMSIS_STM)
+	$(CC) $(CFILES) $(INC_ALL)  -o $(PROJNAME)
+
+run:
+	./$(PROJNAME)
+
+clean:
+	rm $(PROJNAME)

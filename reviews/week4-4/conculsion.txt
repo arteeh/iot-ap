@@ -1,0 +1,18 @@
+Verschil tussen optimalisation 0 en 3:
+Met een breakpoints op begin en einde van calc_average() en optimalisation op level 0 duurt het gehele programma 1351 states.
+Met een breakpoints op begin en einde van calc_average() en optimalisation op level 3 duurt het gehele programma 1336 states.
+(1336 - 1351) / 1351 * 100% geeft een besparing van 1,1%. Voor zo'n klein progamma vind ik dat niet heel veel. 
+Het lijkt alsof er gewoon weinig te optimaliseren valt.
+
+Verschil tussen fixed point en floating point:
+Met een breakpoints op begin en einde van FLOAT calc_average() en optimalisation op level 3 duurt het gehele programma 1336 states.
+Met een breakpoints op begin en einde van FIXED calc_average() en optimalisation op level 3 duurt het gehele programma 467 states.
+(467 - 1336) / 1336* 100% geeft een besparing van 65%. Dit is een flinke reductie van benodigede clock cycles. 
+Hieruit blijkt dat fixed point arithmetic een stuk sneller is dan floating point op de STM32F0.
+
+Invloed van vermenigvuldiging:
+Met een breakpoints op begin en einde van FLOAT calc_average() waarbij sum += 1.1 x *array++; word gedaan en optimalisation op level 3 duurt het gehele programma 2264 states.
+Met een breakpoints op begin en einde van FIXED calc_average() waarbij sum += (float_to_fixed(1.1) * (array[i])) >> SHIFT_AMOUNT; word gedaan en optimalisation op level 3 duurt het gehele programma 493 states.
+Vermenigvuldigingen bij floating point duurt (2264-1336) / 1336* 100% = 69,5% langer.
+Vermenigvuldigingen bij fixed point duurt (493- 467) / 467 * 100% = 5,6% langer.
+Het vermenigvuldigingen van een floating point getal duurt kost dus aanzienlijk meer cylces dan het vermenigvuldigingen van een fixed point getal. 

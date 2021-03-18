@@ -1,0 +1,10 @@
+KLASB
+
+Alle test cases werken inclusief 7, 8 en 9
+
+ 
+De fixed point calcuate functie had maar 6 states nodig en deed er 0.00000075 sec over.
+Terwijl de floating point functie er 89 states voor nodig had en er 0.00001112 seconden voor nodig had.
+
+Dat verschil is best wel enorm groot naar mijn meing, vooraal in groot programma waar veel verschillende soorten data moeten worden verstuurd.
+Is fixed point de manier om geheugen en RAM te besparen. 

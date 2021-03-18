@@ -1,0 +1,43 @@
+Alle testcases zijn geslaagd. Er kan geen underflow/overflow plaatsvinden in deze getallen reeks. Ook de afrondingen werken.
+
+
+• Calculate the number of instruction cycles in the simulator with optimization level 0.
+33329 - 33349 = 20 cycles
+
+• Repeat this with optimization level 3.
+42063 - 42038 = 25 cycles
+
+• Compare the speed of both optimization levels.
+Het snelheids verschil in cycles is 25-20 = 5 cycles
+
+• Is there a big change? If not, why not?
+Het verschil is relatief gezien vrij groot, 5 cycles is 25% sneller als je level 3 met 0 vergelijkt.
+
+• Compare the speed of the fixed point version with the floating point version of the
+function calc_average. Therefore, compile the code with the line#define RUN_FLOAT 1
+(for floating point version) and with this line commented out (for fixed point version)
+Ik heb gebruik gemaakt van optimization level 3, gezien het feit dat er in de opdracht niet stond dat deze weer veranderd moest worden.
+42101 - 42040 = 61 cycles.
+
+• Compare the speed of both versions.
+Het verschil in snelheid tussen optimization level 3 fixed point en floating point is 36 cycles.
+
+• Is there a big change? If not, why not?
+Er is een groot verschil, fixed point is meer dan twee keer zo snel. Dit komt uiteraard door het gebruik van een int inplaats van een float/double wat
+veel minder cycles kost.
+
+• What if we add a multiplication in the function calc_average in the fixed point
+version? We can do this multiplication in two ways. The first way is to use a floating point multiplication: sum += 1.1 * array[i];
+The second way is to do the multiplication using fixed point arithmetic, so by using
+integer multiplication with the fixed representation of 1.1 and shifting the result: sum += (1_1_as_fixed * array[i]) >> number_of_shifts;
+(change the italic code to working code)
+
+
+• Compare the floating point multiplication with the fixed point multiplication.
+Floating point: 
+43292 - 42038 = 1254
+Fixed point arithmetic:
+42068 - 42038 = 30
+• Is there a big change? If not, why not?
+Ja er is een groot verschil, dit komt omdat er bij de een met een double/float gerekend wordt en bij de ander op een fixed point manier dus int manier.
+een int gebruiken om mee te rekenen is veel sneller dan een double of float.

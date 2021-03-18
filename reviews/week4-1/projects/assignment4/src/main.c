@@ -49,7 +49,7 @@ void to_string( fixed number )
 #else	
 
 // choose the correct type for fixed
-typedef  int32_t fixed;   //here change 'float' to the correct integer type
+typedef  int32_t fixed;   //here	 change 'float' to the correct integer type
 
 //your fixed point arithmetic code goes here
 

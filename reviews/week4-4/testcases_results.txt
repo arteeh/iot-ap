@@ -1,0 +1,15 @@
+This is testcode for fixed point arithmetic
+The output of the testcases is
+
+TEST: 1 PASS: 1.0 = 1.0
+TEST: 2 PASS: 0.1 = 0.1
+TEST: 3 PASS: 36.3 = 36.3
+TEST: 4 PASS: 36.4 = 36.4
+TEST: 5 PASS: 24.2 = 24.2
+TEST: 6 PASS: 110.0 = 110.0
+TEST: 7 PASS: -20.0 = -20.0
+TEST: 8 PASS: -19.5 = -19.5
+TEST: 9 PASS: 0.0 = 0.0
+
+You passed 5 of the tests
+Ready
