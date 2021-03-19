@@ -1,5 +1,5 @@
 --cpu Cortex-M0
-".\obj\main6.o"
+".\obj\main5.o"
 ".\obj\stm32f0xx_it.o"
 ".\obj\stm32f0_discovery.o"
 ".\obj\stm32f0xx_exti.o"

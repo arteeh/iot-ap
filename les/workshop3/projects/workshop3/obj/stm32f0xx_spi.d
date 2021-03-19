@@ -2,7 +2,7 @@
 .\obj\stm32f0xx_spi.o: ..\..\libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_spi.h
 .\obj\stm32f0xx_spi.o: ..\..\libraries\CMSIS\ST\STM32F0xx\Include\stm32f0xx.h
 .\obj\stm32f0xx_spi.o: ..\..\libraries\CMSIS\Include\core_cm0.h
-.\obj\stm32f0xx_spi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\stm32f0xx_spi.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\stm32f0xx_spi.o: ..\..\libraries\CMSIS\Include\core_cmInstr.h
 .\obj\stm32f0xx_spi.o: ..\..\libraries\CMSIS\Include\core_cmFunc.h
 .\obj\stm32f0xx_spi.o: ..\..\libraries\CMSIS\ST\STM32F0xx\Include\system_stm32f0xx.h
