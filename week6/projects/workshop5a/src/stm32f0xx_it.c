@@ -1,49 +1,45 @@
 #include "stm32f0xx_it.h"
-#include "stm32f0_discovery.h"
-#include "oing.h"
 
-// Timer 3 interrupt handler
-void TIM3_IRQHandler(void)
+volatile uint32_t DMA_EndOfTransfer = 0;
+
+void DMA1_Channel1_IRQHandler(void)
 {
-	static uint16_t samplePointer = 0;
-	
-	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-	
-	if(samplePointer >= oingLength) samplePointer = 0;
-	
-	// For PWM, set compare to the current sample
-	TIM_SetCompare1(TIM14,oingData[samplePointer]);
-	
-	// For DAC, send sample data to channel
-	DAC_SetChannel1Data(DAC_Align_8b_R,oingData[samplePointer]);
-	
-	samplePointer++;
+	// Test on DMA1 Channel1 Transfer Complete interrupt
+	if(DMA_GetITStatus(DMA1_IT_TC1))
+	{
+		// DMA1 finished the transfer of SrcBuffer
+		DMA_EndOfTransfer = 1;
+		
+		// Clear DMA1 Channel1 Half Transfer, Transfer Complete and Global
+		// interrupt pending bits
+		DMA_ClearITPendingBit(DMA1_IT_GL1);
+	}
 }
 
-// Push button interrupt handler
-void EXTI0_1_IRQHandler(void)
+void SysTick_Handler(void)
 {
-	static uint8_t isDac = 0;
+	static char * morseVal; // string of 1 to 4 characters
+	static bool reading = true; // 1 time period between every character
 	
-	if(isDac)
+	if(reading)
 	{
-		DAC_Cmd(DAC_Channel_1, DISABLE);
-		TIM_Cmd(TIM14, ENABLE);
-		isDac = 0;
+		reading = false;
+		
+		morseVal = morse[buffer[0]-30];
+		if(morseVal == '.')		SysTick_Config(MILLISECONDE*100);
+		else if(morseVal == '-')	SysTick_Config(MILLISECONDE*300);
+		else				SysTick_Config(MILLISECONDE*100);
 	}
 	else
 	{
-		DAC_Cmd(DAC_Channel_1, ENABLE);
-		TIM_Cmd(TIM14, DISABLE);
-		isDac = 1;
+		reading = true;
 	}
-	
-	STM_EVAL_LEDToggle(LED3);
-	STM_EVAL_LEDToggle(LED4);
-	
-	// Clear the EXTI line 0 pending bit
-	EXTI_ClearITPendingBit(EXTI_Line0);
 }
+
+void TIM3_IRQHandler(void){}
+
+// Push button interrupt handler
+void EXTI0_1_IRQHandler(void){}
 
 void HardFault_Handler(void)
 {
@@ -67,4 +63,3 @@ void ADC1_COMP_IRQHandler(void)
 void NMI_Handler(void){}
 void SVC_Handler(void){}
 void PendSV_Handler(void){}
-void SysTick_Handler(void){}

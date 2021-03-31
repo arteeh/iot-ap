@@ -1,68 +1,32 @@
 #include "stm32f0xx.h"
+#include "stm32f0xx_it.h"
 #include "stm32f0_discovery.h"
+#include "usart.h"
 
-void initButton(void);
 void initGpio(void);
 void initTim3(void);
 void initTim14(void);
 void initTim3Interrupt(void);
 void initDac(void);
+void initDma(void);
 
 int main(void)
-{
+{	
+	initUsart();
 	initDac();
 	initGpio();
 	initTim3();
 	initTim3Interrupt();
 	initTim14();
-	initButton();
+	initDma();
 	
-	// Main simply sets CPU to sleep whenever an interrupt is finished.
-	// Will exit sleep when interrupt gets called.
+	SysTick_Config(MILLISECONDE*100);
+	
 	while(1)
 	{
-		PWR_EnterSleepMode(PWR_SLEEPEntry_WFI);
+		PWR_EnterSleepMode(PWR_STOPEntry_WFI);
+		//PWR_EnterSleepMode(PWR_SLEEPEntry_WFI);
 	}
-	
-	return 0;
-}
-
-// Initialize the buttons and leds for switching between PWM and DAC
-void initButton(void)
-{
-	GPIO_InitTypeDef gpio;
-	EXTI_InitTypeDef exti;
-	NVIC_InitTypeDef nvic;
-	
-	STM_EVAL_LEDInit(LED3);
-	STM_EVAL_LEDInit(LED4);
-	
-	// Connect USER button to EXTI line
-	// Enable the BUTTON clock
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-
-	// Set button pin as input
-	gpio.GPIO_Mode			= GPIO_Mode_IN;
-	gpio.GPIO_PuPd			= GPIO_PuPd_NOPULL;
-	gpio.GPIO_Pin			= GPIO_Pin_0;
-	GPIO_Init(GPIOA, &gpio);
-	
-	// Connect EXTI line to Button GPIO pin
-	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource0);
-	
-	// Configure Button EXTI line
-	exti.EXTI_Line			= EXTI_Line0;
-	exti.EXTI_Mode			= EXTI_Mode_Interrupt;
-	exti.EXTI_Trigger		= EXTI_Trigger_Falling;
-	exti.EXTI_LineCmd		= ENABLE;
-	EXTI_Init(&exti);
-	
-	// Configure button interrupt
-	nvic.NVIC_IRQChannel = EXTI0_1_IRQn;
-	nvic.NVIC_IRQChannelPriority = 3;
-	nvic.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&nvic);
 }
 
 // Set pin A4 to alternate function mode
@@ -181,4 +145,35 @@ void initDac(void)
 	DAC_Init(DAC_Channel_1,&dac);
 	
 	DAC_Cmd(DAC_Channel_1,ENABLE);
+}
+
+void initDma(void)
+{
+	DMA_InitTypeDef dma;
+	
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+	
+	// De-initialize DMA1 Channel 3    
+	DMA_DeInit(DMA1_Channel3);
+	
+	// DMA channel Rx of USART Configuration
+	dma.DMA_PeripheralBaseAddr = (uint32_t)&(USART1->RDR);
+	dma.DMA_MemoryBaseAddr     = (uint32_t)buffer;
+	dma.DMA_DIR                = DMA_DIR_PeripheralSRC;
+	dma.DMA_BufferSize         = 10;
+	dma.DMA_PeripheralInc      = DMA_PeripheralInc_Disable;
+	dma.DMA_MemoryInc          = DMA_MemoryInc_Enable;
+	dma.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+	dma.DMA_MemoryDataSize     = DMA_MemoryDataSize_Byte;
+	dma.DMA_Mode               = DMA_Mode_Normal;
+	dma.DMA_Priority           = DMA_Priority_High;
+	dma.DMA_M2M                = DMA_M2M_Disable;
+	
+	DMA_Init(DMA1_Channel3, &dma);
+	
+	// Enable USART1_Rx DMA interface
+	USART_DMACmd(USART1, USART_DMAReq_Rx, ENABLE);
+	
+	// Enable DMA1 Channel 3 (USART1_Rx)
+	DMA_Cmd(DMA1_Channel3, ENABLE);
 }
