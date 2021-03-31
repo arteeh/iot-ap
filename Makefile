@@ -1,5 +1,7 @@
-# Fedora: make arm-none-eabi-gcc arm-none-eabi-newlib
+# Fedora: make arm-none-eabi-gcc arm-none-eabi-newlib stlink
 CC=arm-none-eabi-gcc
+
+OPTIONS=-mcpu=cortex-m0 --specs=nosys.specs
 
 # Projectmap
 PROJ=week6
@@ -26,11 +28,11 @@ DISCOVERY=$(PROJ)/utilities/STM32F0-Discovery
 
 # include locaties overgenomen uit .uvprojx bestand
 INC_ALL=-I$(STARTUP) \
-		-I$(PROJ_INC) \
-		-I$(CMSIS_INC) \
-		-I$(CMSIS_STM_INC) \
-		-I$(STDPERIPH_INC) \
-		-I$(DISCOVERY)
+	-I$(PROJ_INC) \
+	-I$(CMSIS_INC) \
+	-I$(CMSIS_STM_INC) \
+	-I$(STDPERIPH_INC) \
+	-I$(DISCOVERY)
 
 # uVision heeft c bestanden in groepen verdeeld, ik doe het even ook
 # C files overgenomen uit .uvprojx bestand
@@ -40,10 +42,7 @@ CFILES_MAIN=$(SRC)/main.c \
 
 CFILES_DISCO=$(DISCOVERY)/stm32f0_discovery.c
 
-CFILES_STARTUP=$(STARTUP)/system_stm32f0xx.c $(STARTUP)/startup_stm32f0xx.s
-
-# Pakt als goed is alle c bestanden, maar dit is lang niet allemaal nodig
-CFILES_PERIPH_ALL=$(STDPERIPH_SRC)/*
+CFILES_STARTUP=$(STARTUP)/system_stm32f0xx.c
 
 # gebruik in plaats daarvan deze om specifieke periphs te selecteren
 CFILES_PERIPH=$(STDPERIPH_SRC)/stm32f0xx_syscfg.c \
@@ -60,11 +59,18 @@ CFILES_PERIPH=$(STDPERIPH_SRC)/stm32f0xx_syscfg.c \
 
 CFILES=$(CFILES_MAIN) $(CFILES_DISCO) $(CFILES_STARTUP) $(CFILES_PERIPH)
 
+DEFINES=-DUSE_STDPERIPH_DRIVER \
+	-DSTM32F0XX \
+	-DSTM32F051x8
+
 compile:
-	$(CC) $(INC_ALL) $(CFILES) -o $(PROJNAME)
+	$(CC) $(OPTIONS) $(INC_ALL) $(CFILES) $(DEFINES) -o $(PROJNAME)
 
 run:
 	./$(PROJNAME)
+
+flash:
+	sudo st-flash --format ihex write ./$(PROJNAME)
 
 clean:
 	rm $(PROJNAME)
