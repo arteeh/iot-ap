@@ -1,17 +1,29 @@
 #include "usart.h"
 
+// SPDL USART code, uit andere opdrachten en workshops gehaald
+
 void initUsart(void)
 {
+	GPIO_InitTypeDef  gpio;
 	USART_InitTypeDef usart;
 	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 	
+	gpio.GPIO_Mode			= GPIO_Mode_AF;
+	gpio.GPIO_Pin			= GPIO_Pin_9 | GPIO_Pin_10;
+	gpio.GPIO_Speed			= GPIO_Speed_50MHz;
+	
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_1);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_1);
+	
+	GPIO_Init(GPIOA, &gpio);
+	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	USART_StructInit(&usart);
 	
-	usart.USART_BaudRate = 115200;
+	usart.USART_BaudRate	= 115200;
 	
 	USART_Init(USART1, &usart);
-	
 	USART_Cmd(USART1, ENABLE);
 }
 

@@ -1,65 +1,93 @@
 #include "stm32f0xx_it.h"
+#include "morse.h"
+#include "usart.h"
 
+// Niet gebruikt, DMA niet kunnen implementeren
 volatile uint32_t DMA_EndOfTransfer = 0;
 
-void DMA1_Channel1_IRQHandler(void)
-{
-	// Test on DMA1 Channel1 Transfer Complete interrupt
-	if(DMA_GetITStatus(DMA1_IT_TC1))
-	{
-		// DMA1 finished the transfer of SrcBuffer
-		DMA_EndOfTransfer = 1;
-		
-		// Clear DMA1 Channel1 Half Transfer, Transfer Complete and Global
-		// interrupt pending bits
-		DMA_ClearITPendingBit(DMA1_IT_GL1);
-	}
-}
+// Vanwege geen DMA USART input heb ik als demonstratie SOS in de buffer gezet
+uint8_t buffer[11] = {'s','o','s'};
 
+// Deze interrupt wordt elke 100ms aangeroepen.
+// 1 loop door deze interrupt is het begin van een 'time period'
 void SysTick_Handler(void)
 {
-	static char * morseVal; // string of 1 to 4 characters
-	static bool reading = true; // 1 time period between every character
+	static char morseVal;
+	// houd bij of de speaker piept
+	static bool enabled = 0;
+	// Afteller om bij te houden hoeveel time
+	// periods de piep nog aan moet blijven
+	static uint8_t disableIn = 0;
+	// Pointer om door een morse string heen te gaan
+	static uint8_t morsePointer = 0;
+	// Pointer om door de buffer heen te gaan
+	static uint8_t bufferPointer = 0;
 	
-	if(reading)
+	// Wanneer de piep aanstaat, moeten we kijken of deze nog
+	// aan moet blijven. Wanneer ie uit kan, zet hem uit
+	if(enabled)
 	{
-		reading = false;
+		if(disableIn == 0)
+		{
+			// Zet de ledjes uit
+			STM_EVAL_LEDOff(LED3);
+			STM_EVAL_LEDOff(LED4);
+			
+			// Zet de speaker uit
+			TIM_SetCompare2(TIM3, 0);
+			
+			enabled = false;
+		}
+		else disableIn--;
+	}
+	// Als de piep uitstaat, kunnen we door naar het volgende morse karakter
+	else if(!enabled)
+	{
+		// Check of de buffer niet leeg is. Zo ja, stop
+		if(bufferPointer > sizeof(buffer))
+		{
+			return;
+		}
 		
-		morseVal = morse[buffer[0]-30];
-		if(morseVal == '.')		SysTick_Config(MILLISECONDE*100);
-		else if(morseVal == '-')	SysTick_Config(MILLISECONDE*300);
-		else				SysTick_Config(MILLISECONDE*100);
+		// Pak een char uit de buffer en haal het bijbehorende morse karakter op
+		morseVal = morse[buffer[bufferPointer] - 97][morsePointer];
+		
+		// Zet de piep aan voor 1 time period
+		if(morseVal == '.')
+		{
+			uPutString(".");
+			
+			// Zet de ledjes aan
+			STM_EVAL_LEDOn(LED3);
+			STM_EVAL_LEDOn(LED4);
+			
+			// Zet de speaker aan
+			TIM_SetCompare2(TIM3, 3000);
+			enabled = true;
+			disableIn = 1;
+			morsePointer++;
+		}
+		// Zet de piep aan voor 3 time periods
+		else if(morseVal == '-')
+		{
+			uPutString("-");
+			
+			// Zet de ledjes aan
+			STM_EVAL_LEDOn(LED3);
+			STM_EVAL_LEDOn(LED4);
+			
+			// Zet de speaker aan
+			TIM_SetCompare2(TIM3, 3000);
+			
+			enabled = true;
+			disableIn = 3;
+			morsePointer++;
+		}
+		else
+		{
+			// Einde van de morse string bereikt, ga door naar het volgende karakter
+			bufferPointer++;
+			morsePointer = 0;
+		}
 	}
-	else
-	{
-		reading = true;
-	}
 }
-
-void TIM3_IRQHandler(void){}
-
-// Push button interrupt handler
-void EXTI0_1_IRQHandler(void){}
-
-void HardFault_Handler(void)
-{
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
-}
-
-void ADC1_COMP_IRQHandler(void)
-{
-  if(ADC_GetITStatus(ADC1, ADC_IT_AWD) != RESET)
-  {
-    ADC_ClearITPendingBit(ADC1, ADC_IT_AWD);
-    
-    // Turn on Window Watchdog indicator
-    STM_EVAL_LEDOn(LED4);
-  }
-}
-
-void NMI_Handler(void){}
-void SVC_Handler(void){}
-void PendSV_Handler(void){}
