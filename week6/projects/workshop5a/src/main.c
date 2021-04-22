@@ -11,8 +11,7 @@ void initDma(void);
 
 int main(void)
 {
-	// Configureer de ingebouwde ledjes
-	STM_EVAL_LEDInit(LED3);
+	// Configureer het ingebouwde blauwe ledje
 	STM_EVAL_LEDInit(LED4);
 	
 	initUsart();

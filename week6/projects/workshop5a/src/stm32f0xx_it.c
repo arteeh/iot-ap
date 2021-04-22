@@ -29,8 +29,7 @@ void SysTick_Handler(void)
 	{
 		if(disableIn == 0)
 		{
-			// Zet de ledjes uit
-			STM_EVAL_LEDOff(LED3);
+			// Zet het blauwe ledje uit
 			STM_EVAL_LEDOff(LED4);
 			
 			// Zet de speaker uit
@@ -57,12 +56,12 @@ void SysTick_Handler(void)
 		{
 			uPutString(".");
 			
-			// Zet de ledjes aan
-			STM_EVAL_LEDOn(LED3);
+			// Zet het blauwe ledje aan
 			STM_EVAL_LEDOn(LED4);
 			
 			// Zet de speaker aan
 			TIM_SetCompare2(TIM3, 3000);
+			
 			enabled = true;
 			disableIn = 1;
 			morsePointer++;
@@ -72,8 +71,7 @@ void SysTick_Handler(void)
 		{
 			uPutString("-");
 			
-			// Zet de ledjes aan
-			STM_EVAL_LEDOn(LED3);
+			// Zet het blauwe ledje aan
 			STM_EVAL_LEDOn(LED4);
 			
 			// Zet de speaker aan
