@@ -30,3 +30,7 @@
 .\obj\graphics.o: ..\..\libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h
 .\obj\graphics.o: ..\..\libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h
 .\obj\graphics.o: ..\..\libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h
+.\obj\graphics.o: .\inc\main.h
+.\obj\graphics.o: ..\..\utilities\STM32F0-Discovery\stm32f0_discovery.h
+.\obj\graphics.o: .\inc\graphics.h
+.\obj\graphics.o: .\inc\game.h

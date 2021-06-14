@@ -18,12 +18,12 @@
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F0xx_DFP.2.1.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000-0x20001FFF) IROM(0x8000000-0x800FFFF) CLOCK(8000000) CPUTYPE("Cortex-M0")</Cpu>
+          <Cpu>IROM(0x08000000,0x10000) IRAM(0x20000000,0x2000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
-          <StartupFile>"Startup\ST\STM32F0xx\startup_stm32f0xx.s" ("STM32F0xx Startup Code")</StartupFile>
-          <FlashDriverDll>UL2CM3(-O207 -S0 -C0 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F05x_64 -FS08000000 -FL010000)</FlashDriverDll>
-          <DeviceId>6188</DeviceId>
-          <RegisterFile>stm32f0xx.h</RegisterFile>
+          <StartupFile></StartupFile>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F0xx_64 -FS08000000 -FL010000 -FP0($$Device:STM32F051R8$Flash\STM32F0xx_64.FLM))</FlashDriverDll>
+          <DeviceId>0</DeviceId>
+          <RegisterFile>$$Device:STM32F051R8$Device\Include\stm32f0xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,14 +33,14 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>SFD\ST\STM32F0xx\STM32F0xx.sfr</SFDFile>
+          <SFDFile>$$Device:STM32F051R8$SVD\STM32F0xx.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
           <LibPath></LibPath>
-          <RegisterFilePath>ST\STM32F0xx\</RegisterFilePath>
-          <DBRegisterFilePath>ST\STM32F0xx\</DBRegisterFilePath>
+          <RegisterFilePath></RegisterFilePath>
+          <DBRegisterFilePath></DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\obj\</OutputDirectory>
-          <OutputName>lesson5</OutputName>
+          <OutputName>lesson4</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -110,11 +110,11 @@
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
-          <SimDllArguments>-REMAP</SimDllArguments>
+          <SimDllArguments> -REMAP</SimDllArguments>
           <SimDlgDll>DARMCM1.DLL</SimDlgDll>
           <SimDlgDllArguments>-pCM0</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
-          <TargetDllArguments></TargetDllArguments>
+          <TargetDllArguments> -REMAP</TargetDllArguments>
           <TargetDlgDll>TARMCM1.DLL</TargetDlgDll>
           <TargetDlgDllArguments>-pCM0</TargetDlgDllArguments>
         </DllOption>
@@ -134,9 +134,9 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4101</DriverSelection>
+            <DriverSelection>4100</DriverSelection>
           </Flash1>
-          <bUseTDR>0</bUseTDR>
+          <bUseTDR>1</bUseTDR>
           <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
@@ -311,7 +311,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>0</OneElfS>
@@ -326,8 +326,8 @@
             <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
-            <v6LangP>3</v6LangP>
+            <v6Lang>1</v6Lang>
+            <v6LangP>1</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -382,19 +382,24 @@
           <GroupName>user</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f0xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\stm32f0xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>display.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\display.c</FilePath>
+              <FilePath>.\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>graphics.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\graphics.c</FilePath>
+            </File>
+            <File>
+              <FileName>game.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\game.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -411,16 +416,6 @@
         <Group>
           <GroupName>stm32f0-stdperiphlib</GroupName>
           <Files>
-            <File>
-              <FileName>stm32f0xx_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_dac.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_dac.c</FilePath>
-            </File>
             <File>
               <FileName>stm32f0xx_exti.c</FileName>
               <FileType>1</FileType>
@@ -457,11 +452,6 @@
               <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_usart.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f0xx_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_pwr.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f0xx_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_spi.c</FilePath>
@@ -472,14 +462,14 @@
           <GroupName>startup</GroupName>
           <Files>
             <File>
-              <FileName>system_stm32f0xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\startup\system_stm32f0xx.c</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f0xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\startup\startup_stm32f0xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f0xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\startup\system_stm32f0xx.c</FilePath>
             </File>
           </Files>
         </Group>
