@@ -1,35 +1,34 @@
 #include "game.h"
 
-uint8_t paddle;
-uint8_t ballX;
-uint8_t ballY;
-uint8_t ballD;
+uint8_t paddle = 3;
+
+struct ball
+{
+	uint8_t x;
+	uint8_t y;
+	enum direction d;
+} ball;
 
 // The game init, runs once
 void gameInit(void)
-{
+{	
 	// Initial game values
-	paddle = 3;
-	ballX = 4;
-	ballY = 1;
-	ballD = NORTHEAST;
-	
-	matrixClear();
-	matrixUpdate();
+	ball.x = 2;
+	ball.y = 5;
+	ball.d = northeast;
+	displayClear();
+	displayUpdate();
 }
 
-// The game loop, runs at 20Hz
+// The game loop
 void gameUpdate(void)
 {
-	matrixClear();
-	
+	displayClear();
 	movePaddle();
 	drawPaddle();
-	
 	moveBall();
 	drawBall();
-	
-	matrixUpdate();
+	displayUpdate();
 }
 
 // Update the paddle location using a potentiometer
@@ -44,55 +43,58 @@ void drawPaddle(void)
 	buffer[0] = buffer[0] | (3 << (6 - paddle)); // 3 = 00000011
 }
 
-// Update the location of the ball
+// Update the location of the ball, account for collision
 void moveBall(void)
 {
 	// West wall
-	if(ballX == 0 && (ballD == NORTHWEST || ballD == SOUTHWEST))
+	if(ball.x == 0)
 	{
-		// If the ball hits the paddle (ball AND paddle bit), continue
-		if(buffer[ballX] & (1 << (7 - ballY)))
+		// If the ball hits the paddle (ball byte AND paddle byte), continue
+		if(buffer[0] & (1 << (7 - ball.y)))
 		{
-			if(ballD == NORTHWEST) ballD = NORTHEAST;
-			if(ballD == SOUTHWEST) ballD = SOUTHEAST;
+			if(ball.d == northwest) ball.d = northeast;
+			if(ball.d == southwest) ball.d = southeast;
+			
+			faster();
 		}
 		
 		// If the ball goes past the paddle, die
 		else
 		{
-			
+			TIM_Cmd(TIM2, DISABLE);
 		}
 	}
 	
 	// East wall
-	if(ballX == 7 && ballD == NORTHEAST) ballD = NORTHWEST;
-	if(ballX == 7 && ballD == SOUTHEAST) ballD = SOUTHWEST;
+	if(ball.x == GAME_WIDTH && ball.d == northeast) ball.d = northwest;
+	else if(ball.x == GAME_WIDTH && ball.d == southeast) ball.d = southwest;
 	
 	// South wall
-	if(ballY == 0 && ballD == SOUTHEAST) ballD = NORTHEAST;
-	if(ballY == 0 && ballD == SOUTHWEST) ballD = NORTHWEST;
+	if(ball.y == 0 && ball.d == southeast) ball.d = northeast;
+	else if(ball.y == 0 && ball.d == southwest) ball.d = northwest;
 	
 	// North wall
-	if(ballY == 7 && ballD == NORTHEAST) ballD = SOUTHEAST;
-	if(ballY == 7 && ballD == NORTHWEST) ballD = SOUTHWEST;
+	if(ball.y == 7 && ball.d == northeast) ball.d = southeast;
+	else if(ball.y == 7 && ball.d == northwest) ball.d = southwest;
 	
-	switch(ballD)
+	// Update the coordinates
+	switch(ball.d)
 	{
-		case SOUTHEAST:
-			ballX++;
-			ballY--;
+		case southeast:
+			ball.x++;
+			ball.y--;
 			break;
-		case SOUTHWEST:
-			ballX--;
-			ballY--;
+		case southwest:
+			ball.x--;
+			ball.y--;
 			break;
-		case NORTHEAST:
-			ballX++;
-			ballY++;
+		case northeast:
+			ball.x++;
+			ball.y++;
 			break;
-		case NORTHWEST:
-			ballX--;
-			ballY++;
+		case northwest:
+			ball.x--;
+			ball.y++;
 			break;
 	}
 }
@@ -100,5 +102,15 @@ void moveBall(void)
 // Write the ball to the display
 void drawBall(void)
 {
-	buffer[ballX] = buffer[ballX] | (1 << (7 - ballY));
+	buffer[ball.x] = buffer[ball.x] | (1 << (7 - ball.y));
+}
+
+void faster(void)
+{
+	static uint16_t speed = SPEED_INITIAL;
+	
+	// Set the autoreload register for timer 2
+	TIM2->ARR = speed - 1;
+	
+	if(speed > SPEED_MAX) speed = speed * 4 / 5;
 }

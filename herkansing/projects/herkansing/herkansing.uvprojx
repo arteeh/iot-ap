@@ -392,14 +392,19 @@
               <FilePath>.\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>graphics.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\graphics.c</FilePath>
-            </File>
-            <File>
               <FileName>game.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\game.c</FilePath>
+            </File>
+            <File>
+              <FileName>init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\init.c</FilePath>
+            </File>
+            <File>
+              <FileName>display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\display.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -427,6 +432,21 @@
               <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_gpio.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f0xx_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_pwr.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f0xx_misc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_misc.c</FilePath>
@@ -440,21 +460,6 @@
               <FileName>stm32f0xx_syscfg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_syscfg.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\STM32F0xx_StdPeriph_Driver\src\stm32f0xx_spi.c</FilePath>
             </File>
           </Files>
         </Group>
