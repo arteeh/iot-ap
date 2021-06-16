@@ -18,7 +18,6 @@
 extern uint8_t buffer[9];
 
 void displayInit(void);
-void displayClear(void);
 void displayUpdate(void);
 void displayWrite(uint8_t address, uint8_t data);
 

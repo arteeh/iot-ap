@@ -14,17 +14,6 @@ void displayInit(void)
 	displayWrite(displayRegDisplayTest, 0x00);				// no test display
 }
 
-// Clear the buffer and the display
-void displayClear(void)
-{
-	int i;
-	for(i = 0; i <= 7; i++)
-	{
-		buffer[i] = 0;
-	}
-	displayUpdate();
-}
-
 // Push the buffer to the display
 void displayUpdate(void)
 {
