@@ -5,7 +5,7 @@
 
 // How long the game should be, horizontally.
 // 7 for the max7219 size, 8 for fun gameplay.
-#define GAME_WIDTH		8
+#define GAME_WIDTH		7
 
 // This sets the autoreload register for timer 2.
 // Smaller number means faster ball.
@@ -22,11 +22,11 @@ enum direction
 	northwest
 };
 
+extern uint8_t paddle;
+
 void gameInit(void);
 void gameUpdate(void);
-void drawPaddle(void);
 void movePaddle(void);
-void drawBall(void);
 void moveBall(void);
 void faster(void);
 

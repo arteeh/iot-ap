@@ -1,6 +1,6 @@
 #include "game.h"
 
-uint8_t paddle = 3;
+uint8_t paddle = 1;
 
 struct ball
 {
@@ -24,23 +24,16 @@ void gameInit(void)
 void gameUpdate(void)
 {
 	displayClear();
-	movePaddle();
-	drawPaddle();
 	moveBall();
-	drawBall();
+	movePaddle();
 	displayUpdate();
 }
 
-// Update the paddle location using a potentiometer
+// Write the paddle to the display
 void movePaddle(void)
 {
-	
-}
-
-// Write the paddle to the display
-void drawPaddle(void)
-{
-	buffer[0] = buffer[0] | (3 << (6 - paddle)); // 3 = 00000011
+	//buffer[0] = buffer[0] | (3 << (6 - paddle)); // 3 = 00000011
+	buffer[0] = (3 << (6 - paddle)); // 3 = 00000011
 }
 
 // Update the location of the ball, account for collision
@@ -97,14 +90,12 @@ void moveBall(void)
 			ball.y++;
 			break;
 	}
-}
-
-// Write the ball to the display
-void drawBall(void)
-{
+	
+	// Draw the ball to the screen
 	buffer[ball.x] = buffer[ball.x] | (1 << (7 - ball.y));
 }
 
+// Make the ball go faster
 void faster(void)
 {
 	static uint16_t speed = SPEED_INITIAL;

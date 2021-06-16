@@ -12,9 +12,10 @@ int main(void)
 	gpio();
 	spi();
 	timer2();
-	timer3();
+	//timer3();
 	timer14();
 	button();
+	adc();
 	
 	// display.c
 	displayInit();
@@ -26,6 +27,6 @@ int main(void)
 	{
 		// Stop mode, enable when interrupt goes off.
 		// Go back to sleep when there's no interrupt.
-		PWR_EnterSleepMode(PWR_STOPEntry_WFI);
+		//PWR_EnterSleepMode(PWR_STOPEntry_WFI);
 	}
 }

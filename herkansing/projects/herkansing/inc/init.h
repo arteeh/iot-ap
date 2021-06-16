@@ -6,9 +6,10 @@
 
 void gpio(void);
 void spi(void);
+void adc(void);
+void button(void);
 void timer2(void);
 void timer3(void);
 void timer14(void);
-void button(void);
 
 #endif // INIT_H
